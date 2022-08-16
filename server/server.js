@@ -1,23 +1,20 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const SpotifyWebApi = require("spotify-web-api-node");
 
-const client_id = "151951ea4c86411c90d5c0e8fd547864";
-const redirect_uri = "http://localhost:3000/callback";
-const client_secret = "d20294a374d740e2b26ce89eae41ccaf";
-const scope = ["streaming", "user-read-email", "user-read-private", "user-library-read", "user-library-modify", "user-read-playback-state", "user-modify-playback-state"];
-
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post("/callback", (req, res) => {
+app.post("/login", (req, res) => {
   const code = req.body.code;
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: redirect_uri,
-    clientId: client_id,
-    clientSecret: client_secret,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    redirectUri: process.env.REDIRECT_URI,
   });
 
   // Retrieve an access token and a refresh token
@@ -32,6 +29,29 @@ app.post("/callback", (req, res) => {
     })
     .catch((err) => {
       console.log("Something went wrong!", err);
+    });
+});
+
+app.post("/refresh", (req, res) => {
+  const refreshToken = req.body.refreshToken;
+  const spotifyApi = new SpotifyWebApi({
+    redirectUri: process.env.REDIRECT_URI,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken,
+  });
+
+  spotifyApi
+    .refreshAccessToken()
+    .then((data) => {
+      res.json({
+        accessToken: data.body.access_token,
+        expiresIn: data.body.expires_in,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(400);
     });
 });
 
