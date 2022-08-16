@@ -6,8 +6,6 @@ import 'swiper/css/pagination'
 
 import AlbumCard from './AlbumCard'
 import ArtistCard from './ArtistCard'
-import Card from './common/Card'
-import sliceText from './../helpers/sliceText'
 import PlaylistCard from './PlayListCard'
 import TrackCard from './TrackCard'
 
@@ -50,15 +48,6 @@ export default function CustomSwiper({ type, slides }) {
       {slides &&
         slides.items.map(item => (
           <SwiperSlide key={item.id}>
-            {/* <Card className="h-[250px] items-stretch gap-4 p-4">
-              <img
-                className="aspect-square rounded-full object-cover"
-                src={item.images ? item.images[0].url : item.album.images[0].url}
-                alt=""
-              />
-              <h3 className="font-bold">{sliceText(item.name, 22)}</h3>
-            </Card> */}
-
             {type === 'albums' && <AlbumCard item={item} />}
             {type === 'artists' && <ArtistCard item={item} />}
             {type === 'playlists' && <PlaylistCard item={item} />}

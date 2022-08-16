@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from './common/Card'
-import sliceText from './../helpers/sliceText'
+import { sliceText } from '../helpers'
+
 import { BsPlayCircleFill } from 'react-icons/bs'
 
 export default function TrackCard({ item }) {
@@ -14,7 +15,11 @@ export default function TrackCard({ item }) {
         />
         <img
           className="aspect-square rounded-md object-cover"
-          src={item.album.images ? item.album.images[0].url : null}
+          src={
+            item.album.images
+              ? item.album.images[0].url
+              : 'https://via.placeholder.com/640x640'
+          }
           alt=""
         />
       </div>
