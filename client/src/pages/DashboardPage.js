@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import useAuth from '../hooks/useAuth'
 
 import getItem from '../services/getItem'
 import getUserProfile from '../services/getUserProfile'
@@ -9,11 +8,10 @@ import SearchInput from '../components/SearchInput'
 import CustomSwiper from '../components/CustomSwiper'
 import Player from '../components/Player'
 import UserProfile from '../components/UserProfile'
+import { useApi } from '../context/ApiContext'
 
 export default function DashboardPage() {
-  // The code that's returned as a query parameter to the redirect URI
-  const code = new URLSearchParams(window.location.search).get('code')
-  const accessToken = useAuth(code)
+  const { accessToken } = useApi()
 
   const [playingTrack, setPlayingTrack] = useState()
   const [userProfile, setUserProfile] = useState()
