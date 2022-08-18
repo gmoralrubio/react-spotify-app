@@ -3,10 +3,17 @@ import Card from './common/Card'
 import { sliceText } from '../helpers'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
+import { useApi } from './../context/ApiContext'
 
 export default function TrackCard({ item }) {
+  const { setPlayTrack } = useApi()
+
+  const clickHandler = () => {
+    setPlayTrack(item.uri)
+  }
+
   return (
-    <Card className="h-[250px] items-stretch gap-4 p-4">
+    <Card className="h-[250px] items-stretch gap-4 p-4" onClick={clickHandler}>
       <div className="relative">
         <BsPlayCircleFill
           className="w absolute bottom-2 right-2"
