@@ -9,7 +9,7 @@ export default async function getAlbumTracks(id, accessToken) {
     },
   }
   let response = await fetch(
-    `${BASE_API_URL}/albums/${id}/tracks?markets=ES`,
+    `${BASE_API_URL}/albums/${id}/tracks?market=ES`,
     queryParameters
   )
   let result = await response.json()
