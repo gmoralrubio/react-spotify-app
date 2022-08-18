@@ -10,10 +10,16 @@ import PlaylistCard from './PlayListCard'
 import TrackCard from './TrackCard'
 import { capitalizeFirstLetter } from './../helpers'
 
-export default function CustomSwiper({ type, slides }) {
+export default function CustomSwiper({ slides }) {
+  const playHandler = uri => {
+    console.log('playHandler', uri)
+  }
+
   return (
     <div className="rounded-md bg-slate-700 p-4">
-      <h2 className="mb-4 text-xl font-bold text-white">{capitalizeFirstLetter(type)}</h2>
+      <h2 className="mb-4 text-xl font-bold text-white">
+        {capitalizeFirstLetter(slides.items[0].type) + 's'}
+      </h2>
       <Swiper
         modules={[Pagination, Mousewheel]}
         spaceBetween={10}
@@ -51,11 +57,12 @@ export default function CustomSwiper({ type, slides }) {
         {slides &&
           slides.items.map(item => (
             <SwiperSlide key={item.id}>
-              {type === 'albums' && <AlbumCard item={item} />}
-              {type === 'artists' ||
-                (type === 'top artists' && <ArtistCard item={item} />)}
-              {type === 'playlists' && <PlaylistCard item={item} />}
-              {type === 'tracks' || (type === 'top tracks' && <TrackCard item={item} />)}
+              {slides.items[0].type === 'album' && <AlbumCard item={item} />}
+              {slides.items[0].type === 'artist' && <ArtistCard item={item} />}
+              {slides.items[0].type === 'playlist' && <PlaylistCard item={item} />}
+              {slides.items[0].type === 'track' && (
+                <TrackCard item={item} onPlayTrack={playHandler} />
+              )}
             </SwiperSlide>
           ))}
       </Swiper>
