@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import getAlbumTracks from '../services/getAlbumTracks'
 import { millisToMinutesAndSeconds } from '../helpers'
 import { useApi } from './../context/ApiContext'
@@ -7,16 +7,17 @@ import Player from './../components/Player'
 import SearchInput from '../components/SearchInput'
 
 export default function AlbumTracksPage() {
-  const [albumTracks, setAlbumTracks] = useState()
+  const { accessToken, setPlayTrack } = useApi()
+
   // REVISAR
   let { albumId, albumName } = useParams()
-  const { accessToken, setPlayTrack } = useApi()
+  const [albumTracks, setAlbumTracks] = useState()
 
   useEffect(() => {
     getAlbumTracks(albumId, accessToken)
-      .then(albumTracks => setAlbumTracks(albumTracks))
+      .then(tracks => setAlbumTracks(tracks))
       .then(console.log('albumTracks', albumTracks))
-  }, [albumId])
+  }, [albumId, accessToken])
 
   const clickHandler = trackUri => {
     setPlayTrack(trackUri)
