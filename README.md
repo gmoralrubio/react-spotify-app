@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-https://github.com/thelinmichael/spotify-web-api-node
+https://github.com/thelinmichael/spotify-web-api-node \
 https://github.com/gilbarbara/react-spotify-web-playback
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
