@@ -2,18 +2,27 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import getAlbumTracks from '../services/getAlbumTracks'
 import { millisToMinutesAndSeconds } from '../helpers'
+import { useApi } from './../context/ApiContext'
+import Player from './../components/Player'
 
-export default function AlbumTracksPage({ accessToken }) {
+export default function AlbumTracksPage() {
   const [albumTracks, setAlbumTracks] = useState()
   let { albumId, albumName } = useParams()
+  const { accessToken } = useApi()
 
   useEffect(() => {
     getAlbumTracks(albumId, accessToken)
       .then(albumTracks => setAlbumTracks(albumTracks))
       .then(console.log('albumTracks', albumTracks))
   }, [albumId])
+
   return (
-    <>
+    <div className="relative">
+      {accessToken && (
+        <div className="fixed bottom-0 left-0 z-50 w-full">
+          <Player />
+        </div>
+      )}
       <div className="flex flex-col gap-2">
         <div className="grid grid-cols-6 p-2 font-bold text-white">
           <span className="col-span-2">Title</span>
@@ -39,6 +48,6 @@ export default function AlbumTracksPage({ accessToken }) {
             </Link>
           ))}
       </div>
-    </>
+    </div>
   )
 }
