@@ -42,7 +42,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="relative  py-6 ">
+      <div className="relative py-6 ">
         {userProfile && <UserProfile userProfile={userProfile} />}
 
         <SearchInput onSearch={searchHandler} />
