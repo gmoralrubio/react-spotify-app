@@ -11,9 +11,8 @@ import UserProfile from '../components/UserProfile'
 import { useApi } from '../context/ApiContext'
 
 export default function DashboardPage() {
-  const { accessToken } = useApi()
+  const { accessToken, setInitialPlayTrack } = useApi()
 
-  const [playingTrack, setPlayingTrack] = useState()
   const [userProfile, setUserProfile] = useState()
   const [userTopTracks, setUserTopTracks] = useState()
   const [userTopArtists, setUserTopArtists] = useState()
@@ -27,7 +26,10 @@ export default function DashboardPage() {
   useEffect(() => {
     if (accessToken) {
       getUserProfile(accessToken).then(res => setUserProfile(res))
-      getUserTopTracks(accessToken).then(res => setUserTopTracks(res))
+      getUserTopTracks(accessToken).then(res => {
+        setUserTopTracks(res)
+        setInitialPlayTrack(res.items[0].uri)
+      })
       getUserTopArtists(accessToken).then(res => setUserTopArtists(res))
     }
   }, [accessToken])
@@ -36,7 +38,7 @@ export default function DashboardPage() {
     <>
       {accessToken && (
         <div className="fixed bottom-0 left-0 z-50 w-full">
-          <Player accessToken={accessToken} trackUri={playingTrack?.uri}></Player>
+          <Player />
         </div>
       )}
 
@@ -56,13 +58,13 @@ export default function DashboardPage() {
           {searchResult && (
             <>
               {/* {console.log('albums', searchResult.albums)} */}
-              <CustomSwiper type={'albums'} slides={searchResult.albums} />
-              {/* {console.log('artists', searchResult.artists)} */}
-              <CustomSwiper type={'artists'} slides={searchResult.artists} />
+              <CustomSwiper slides={searchResult.albums} />
+              {console.log('artists', searchResult.artists)}
+              <CustomSwiper slides={searchResult.artists} />
               {/* {console.log('playlists', searchResult.playlists)} */}
-              <CustomSwiper type={'playlists'} slides={searchResult.playlists} />
+              <CustomSwiper slides={searchResult.playlists} />
               {/* {console.log('tracks', searchResult.tracks)} */}
-              <CustomSwiper type={'tracks'} slides={searchResult.tracks} />
+              <CustomSwiper slides={searchResult.tracks} />
             </>
           )}
         </div>
