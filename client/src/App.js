@@ -3,6 +3,7 @@ import DashboardPage from './pages/DashboardPage'
 import LoginPage from './pages/LoginPage'
 import AlbumTracksPage from './pages/AlbumTracksPage'
 import { ApiProvider } from './context/ApiContext'
+import ArtistAlbumsPage from './pages/ArtistAlbumsPage'
 
 function App() {
   const code = new URLSearchParams(window.location.search).get('code')
@@ -18,6 +19,7 @@ function App() {
               path="/album-tracks/:albumId/:albumName"
               element={<AlbumTracksPage />}
             />
+            <Route path="/artist-albums/:albumId" element={<ArtistAlbumsPage />} />
           </Routes>
         </div>
       </BrowserRouter>
