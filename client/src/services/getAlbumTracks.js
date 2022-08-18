@@ -1,8 +1,6 @@
 import { BASE_API_URL } from '../config'
 
 export default async function getAlbumTracks(id, accessToken) {
-  console.log('accessToken', accessToken)
-  console.log('id', id)
   const queryParameters = {
     method: 'GET',
     headers: {
