@@ -11,10 +11,6 @@ import TrackCard from './TrackCard'
 import { capitalizeFirstLetter } from './../helpers'
 
 export default function CustomSwiper({ slides }) {
-  const playHandler = uri => {
-    console.log('playHandler', uri)
-  }
-
   return (
     <div className="rounded-md bg-slate-700 p-4">
       <h2 className="mb-4 text-xl font-bold text-white">
@@ -24,7 +20,7 @@ export default function CustomSwiper({ slides }) {
         modules={[Pagination, Mousewheel]}
         spaceBetween={10}
         slidesPerView={2}
-        onSlideChange={() => console.log('slide change')}
+        onSlideChange={() => {}}
         onSwiper={swiper => {}}
         mousewheel={true}
         direction={'horizontal'}
@@ -60,9 +56,7 @@ export default function CustomSwiper({ slides }) {
               {slides.items[0].type === 'album' && <AlbumCard item={item} />}
               {slides.items[0].type === 'artist' && <ArtistCard item={item} />}
               {slides.items[0].type === 'playlist' && <PlaylistCard item={item} />}
-              {slides.items[0].type === 'track' && (
-                <TrackCard item={item} onPlayTrack={playHandler} />
-              )}
+              {slides.items[0].type === 'track' && <TrackCard item={item} />}
             </SwiperSlide>
           ))}
       </Swiper>
