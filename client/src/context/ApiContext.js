@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import useAuth from './../hooks/useAuth'
-import axios from 'axios'
 
 const ApiContext = React.createContext()
 
@@ -11,5 +10,20 @@ export function useApi() {
 export const ApiProvider = ({ children, code }) => {
   const accessToken = useAuth(code)
 
-  return <ApiContext.Provider value={{ accessToken }}>{children}</ApiContext.Provider>
+  const [playTrack, setPlayTrack] = useState()
+  const [initialPlayTrack, setInitialPlayTrack] = useState()
+
+  return (
+    <ApiContext.Provider
+      value={{
+        accessToken,
+        playTrack,
+        initialPlayTrack,
+        setPlayTrack,
+        setInitialPlayTrack,
+      }}
+    >
+      {children}
+    </ApiContext.Provider>
+  )
 }
