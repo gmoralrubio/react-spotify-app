@@ -14,9 +14,7 @@ export default function AlbumTracksPage() {
   const [albumTracks, setAlbumTracks] = useState()
 
   useEffect(() => {
-    getAlbumTracks(albumId, accessToken)
-      .then(tracks => setAlbumTracks(tracks))
-      .then(console.log('albumTracks', albumTracks))
+    getAlbumTracks(albumId, accessToken).then(setAlbumTracks)
   }, [albumId, accessToken])
 
   const clickHandler = trackUri => {
