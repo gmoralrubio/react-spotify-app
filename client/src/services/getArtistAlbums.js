@@ -9,7 +9,7 @@ export default async function getArtistAlbums(id, accessToken) {
     },
   }
   let response = await fetch(
-    `${BASE_API_URL}/artists/${id}/albums?market=ES`,
+    `${BASE_API_URL}/artists/${id}/albums?market=ES&include_groups=album`,
     queryParameters
   )
   let result = await response.json()
