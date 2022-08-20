@@ -1,8 +1,8 @@
 import SpotifyPlayer from 'react-spotify-web-playback'
-import { useApi } from './../context/ApiContext'
+import { useApp } from '../context/AppContext'
 
 export default function Player() {
-  const { accessToken, playTrack, initialPlayTrack } = useApi()
+  const { accessToken, playTrack, initialPlayTrack } = useApp()
   return (
     <>
       {initialPlayTrack && (

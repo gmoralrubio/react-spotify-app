@@ -3,10 +3,10 @@ import Card from './common/Card'
 import { sliceText } from '../helpers'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
-import { useApi } from './../context/ApiContext'
+import { useApp } from '../context/AppContext'
 
 export default function TrackCard({ item }) {
-  const { setPlayTrack } = useApi()
+  const { setPlayTrack } = useApp()
 
   const clickHandler = () => {
     setPlayTrack(item.uri)

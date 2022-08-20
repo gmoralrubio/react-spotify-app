@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import getAlbumTracks from '../services/getAlbumTracks'
 import { millisToMinutesAndSeconds } from '../helpers'
-import { useApi } from './../context/ApiContext'
+import { useApp } from '../context/AppContext'
 import Player from './../components/Player'
 import SearchInput from '../components/SearchInput'
 
 export default function AlbumTracksPage() {
-  const { accessToken, setPlayTrack } = useApi()
+  const { accessToken, setPlayTrack } = useApp()
 
   // REVISAR
   let { albumId, albumName } = useParams()
@@ -37,9 +37,7 @@ export default function AlbumTracksPage() {
       </div>
 
       {/* TODO: implementar busqueda */}
-      <div className="mb-10">
-        <SearchInput />
-      </div>
+      <div className="mb-10">{/* <SearchInput /> */}</div>
 
       <div className="flex flex-col gap-2">
         <div className="grid grid-cols-6 p-2 font-bold text-white">

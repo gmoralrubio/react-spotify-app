@@ -2,14 +2,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import DashboardPage from './pages/DashboardPage'
 import LoginPage from './pages/LoginPage'
 import AlbumTracksPage from './pages/AlbumTracksPage'
-import { ApiProvider } from './context/ApiContext'
+import { AppProvider } from './context/AppContext'
 import ArtistAlbumsPage from './pages/ArtistAlbumsPage'
 
 function App() {
   const code = new URLSearchParams(window.location.search).get('code')
 
   return (
-    <ApiProvider code={code}>
+    <AppProvider code={code}>
       <BrowserRouter>
         <div className="mx-auto max-w-6xl bg-slate-800 px-6">
           <Routes>
@@ -23,7 +23,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-    </ApiProvider>
+    </AppProvider>
   )
 }
 
