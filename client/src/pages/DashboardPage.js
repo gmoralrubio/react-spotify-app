@@ -9,9 +9,10 @@ import CustomSwiper from '../components/CustomSwiper'
 import Player from '../components/Player'
 import UserProfile from '../components/UserProfile'
 import { useApp } from '../context/AppContext'
+import { Link } from 'react-router-dom'
 
 export default function DashboardPage() {
-  const { accessToken, setInitialPlayTrack, searchResult } = useApp()
+  const { accessToken, searchResult, setInitialPlayTrack } = useApp()
 
   const [userProfile, setUserProfile] = useState()
   const [userTopTracks, setUserTopTracks] = useState()
@@ -40,7 +41,6 @@ export default function DashboardPage() {
         {userProfile && <UserProfile userProfile={userProfile} />}
 
         <SearchInput />
-        {/* <SearchInput onSearch={searchHandler} /> */}
 
         <div className=" flex flex-col gap-8 py-10">
           {userTopTracks && !searchResult && (
