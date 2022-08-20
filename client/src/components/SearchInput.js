@@ -1,7 +1,9 @@
-import React from 'react'
 import { useState } from 'react'
+import { useApp } from '../context/AppContext'
 
-export default function SearchInput({ onSearch }) {
+export default function SearchInput() {
+  const { searchHandler } = useApp()
+
   const [searchInput, setSearchInput] = useState('')
 
   const searchInputHandler = e => setSearchInput(e.target.value)
@@ -9,7 +11,7 @@ export default function SearchInput({ onSearch }) {
   const submitHandler = e => {
     e.preventDefault()
     if (searchInput.trim().length === 0) return
-    onSearch(searchInput)
+    searchHandler(searchInput)
     setSearchInput('')
   }
   return (
